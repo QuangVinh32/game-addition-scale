@@ -1,6 +1,5 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { IRefPhaserGame, PhaserGame } from './game/PhaserGame';
-import { MainMenu } from './game/scenes/MainMenu';
 
 function App()
 {
@@ -11,17 +10,7 @@ function App()
 
     const outsideIn = () => {
 
-        if(phaserRef.current)
-        {     
-            const scene = phaserRef.current.scene as MainMenu;
-            
-            if (scene)
-            {
-                scene.outsideIn(outsideInMessage, (message) => {
-                    setInsideOutMessage(message);
-                });
-            }
-        }
+  
     }
 
     function onMessageChange(e: any) {
