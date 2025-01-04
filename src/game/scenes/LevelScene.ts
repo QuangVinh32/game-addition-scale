@@ -56,7 +56,7 @@ export default class LevelScene extends Phaser.Scene {
 
     private async initializeServices() {
         this.mountainService = new MountainService(this, 'assets/data/mountain.json');
-        await this.mountainService.initialize(this.levelId);
+        await this.mountainService.initializeNoView(this.levelId);
 
         this.crossbarService = new CrossbarService(this, 'assets/data/crossbar.json');
         await this.crossbarService.initialize(this.levelId);
