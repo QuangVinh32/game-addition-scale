@@ -45,7 +45,7 @@ export default class LevelScene extends Phaser.Scene {
         this.events.on('updateLevel', (data: { isCorrect: boolean }) => {
             this.isCorrect = data.isCorrect;
             console.log('Received data in LevelScene:', data);
-            this.updateMountainView();
+            // this.updateMountainView();
         });
 
         await this.initializeServices();

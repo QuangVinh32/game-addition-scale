@@ -39,7 +39,6 @@ export default class LoadingScene extends Phaser.Scene {
             this.scene.launch('UIScene');
             this.scene.launch('GamePlayScene');
             this.scene.start('LevelScene')
-            // this.scene.launch('QuestionAndOptionScene');
 
         });
 
