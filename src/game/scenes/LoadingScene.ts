@@ -32,8 +32,8 @@ export default class LoadingScene extends Phaser.Scene {
             repeat: -1         
         });
 
-        const fruit = this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'fruitFall');
-        fruit.play('falling');
+        const loading = this.add.sprite(this.scale.width / 2, this.scale.height / 2, 'loading');
+        loading.play('falling');
 
         this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.launch('UIScene');

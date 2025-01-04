@@ -24,7 +24,6 @@ export default class FalseScene extends Phaser.Scene {
         this.add.text(this.scale.width / 2,
             430, 'No, try again.', {
             fontSize: '20px Arial',
-            // fontStyle: 'bold',
             color: 'black',
        }).setOrigin(0.5, 0.5).setResolution(2);
 

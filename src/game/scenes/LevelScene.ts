@@ -41,7 +41,6 @@ export default class LevelScene extends Phaser.Scene {
 
     async create() {
         
-        this.isCorrect = null;
         this.events.on('updateLevel', (data: { isCorrect: boolean }) => {
             this.isCorrect = data.isCorrect;
             console.log('Received data in LevelScene:', data);
@@ -68,9 +67,9 @@ export default class LevelScene extends Phaser.Scene {
             return;
         }
 
-        const mountainDTO = this.mountainService.getMountainDTOById(this.levelId);
+        const mountainDTO = this.mountainService.getMountainViewById(this.levelId);
         if (mountainDTO) {
-            this.mountainView = this.mountainService.getMountainViewById(this.levelId);
+            this.mountainView = mountainDTO
         }
 
         const crossbarDTO = this.crossbarService.getCrossbarViewById(this.levelId);
@@ -128,8 +127,7 @@ export default class LevelScene extends Phaser.Scene {
                     },
                 });
             }
-        }
-        
+        }     
     }
     
 

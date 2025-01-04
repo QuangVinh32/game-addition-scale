@@ -38,10 +38,8 @@ export class QuestionAndOptionScene extends Phaser.Scene {
 
     async create() {
 
-
         console.log('123456',this.isGameStarted)
 
-        // Lắng nghe sự kiện từ GamePlayScene
         const gamePlayScene = this.scene.get('GamePlayScene') as GamePlayScene;
         gamePlayScene.events.once('gameStarted', () => {
             this.isGameStarted = true;
@@ -62,7 +60,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         const options = [];
         const max = 20;
 
-        // Luôn xuất hiện đáp án
         options.push(calculatedValue?.toFixed(0).toString());
         
         while (options.length < 5) {
@@ -131,7 +128,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
             if (!this.isGameStarted) return; 
             if (gameObject === container) {
                 gameObject.setScale(1);
-                // console.log(`Thả container tại: (${gameObject.x}, ${gameObject.y})`);
     
                 if (this.isCorrectDrop(gameObject.x, gameObject.y)) {
                     const isCorrect = this.checkAnswer(
@@ -143,20 +139,11 @@ export class QuestionAndOptionScene extends Phaser.Scene {
                         this.successSound.play();
                         this.scene.launch('UIScene',{correct: this.correct})
 
-                        // Mỗi lần launch thì nó sẽ render lại bao gồm cả tweens lẫn question và option
                         this.scene.get('LevelScene').events.emit('updateLevel', { isCorrect: true });
 
                         gameObject.setVisible(false);
                         this.scene.launch('TrueScene')
                         this.scene.stop('QuestionAndOptionScene')
-                        
-                        // Truyền dữ liệu sang LevelScene sau đó thực hiện các chức năng sau:
-                        // Mountain chuyển frame
-                        // Hiện thị đáp án vào dấu ? trong question
-                        // Crossbar và Question đổi góc xoay về 0
-
-                        // Đáp án UIScene là Correct tăng ++
-                        // Bên TrueScene sẽ hiện thị button để sang level tiếp theo    
 
                     } else {
                         this.failureSound.play();
@@ -168,15 +155,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
                         gameObject.setVisible(false); 
                         this.scene.launch('FalseScene')
                         this.scene.stop('QuestionAndOptionScene')
-
-                        // Truyền dữ liệu sang LevelScene sau đó thực hiện các chức năng sau:
-                        // Mountain chuyển frame
-                        // Hiện thị đáp án vào dấu ? trong question
-                        // Crossbar và Question có thể đổi góc hoặc không và sau đó Tweens mất Question
-
-                        // Bên UIScene đáp án sẽ là InCorrect tăng ++
-                        // Bên FalseScene sẽ hiện thị phương trình
-
                     }
                 } else {
                     console.log('Không thả vào vùng hợp lệ.');
@@ -189,12 +167,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
     checkAnswer(currentCount: number, optionDTO: OptionDTO): boolean {
         console.log(`Đáp án đúng: ${currentCount}`);
         console.log(`Giá trị kéo thả: ${optionDTO.value}`);
-    
-        // // Kiểm tra nếu cả hai giá trị hợp lệ
-        // if (currentCount == null || optionDTO.value == null) {
-        //     console.error('Một trong hai giá trị bị null hoặc undefined');
-        //     return false;
-        // }
     
         // So sánh với sai số nhỏ
         const tolerance = 0.5;
@@ -218,9 +190,8 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         const screenHeight = this.scale.gameSize.height;
         const upperBound = screenHeight / 2.5;
 
-        // Tạo đối tượng Graphics để vẽ viền
         this.boundaryGraphics = this.add.graphics();
-        this.boundaryGraphics.lineStyle(2, 0xFF0000, 1); // Màu đỏ, độ dày 2px
-        this.boundaryGraphics.strokeRect(0, 0, this.scale.width, upperBound); // Vẽ hình chữ nhật
+        this.boundaryGraphics.lineStyle(2, 0xFF0000, 1); 
+        this.boundaryGraphics.strokeRect(0, 0, this.scale.width, upperBound);
     }  
 }
