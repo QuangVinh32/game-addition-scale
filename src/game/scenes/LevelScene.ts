@@ -41,7 +41,6 @@ export default class LevelScene extends Phaser.Scene {
 
     async create() {
         
-        // this.isCorrect = null;
         this.events.on('updateLevel', (data: { isCorrect: boolean }) => {
             this.isCorrect = data.isCorrect;
             console.log('Received data in LevelScene:', data);
@@ -80,6 +79,7 @@ export default class LevelScene extends Phaser.Scene {
     }
 
     private updateMountainView() {
+
         if (!this.mountainView) {
             console.warn('Mountain view is not initialized.');
             return;
@@ -117,16 +117,16 @@ export default class LevelScene extends Phaser.Scene {
                     targetX += 650; 
                 }
         
-                this.tweens.add({
-                    targets: this.questionView,
-                    x: targetX, 
-                    duration: 1100, 
-                    ease: 'Power1', 
-                    yoyo: false,
-                    onComplete: () => {
+                // this.tweens.add({
+                //     targets: this.questionView,
+                //     x: targetX, 
+                //     duration: 1100, 
+                //     ease: 'Power1', 
+                //     yoyo: false,
+                //     onComplete: () => {
 
-                    },
-                });
+                //     },
+                // });
             }
         }
          else {
