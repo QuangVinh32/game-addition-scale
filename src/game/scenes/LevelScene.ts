@@ -15,8 +15,6 @@ export default class LevelScene extends Phaser.Scene {
     private calculationString: any;
     private calculatedValue : any;
 
-
-
     constructor() {
         super('LevelScene');
         this.levelId = 1;
@@ -66,17 +64,22 @@ export default class LevelScene extends Phaser.Scene {
             console.warn('Services are not initialized.');
             return;
         }
-
+    
         const mountainDTO = this.mountainService.getMountainViewById(this.levelId);
-        if (mountainDTO) {
-            this.mountainView = mountainDTO
+        if (!mountainDTO) {
+            console.error('Failed to retrieve mountainDTO.');
+            return;
         }
-
+        this.mountainView = mountainDTO;
+    
         const crossbarDTO = this.crossbarService.getCrossbarViewById(this.levelId);
-        if (crossbarDTO) {
-            this.crossbarView = crossbarDTO;
+        if (!crossbarDTO) {
+            console.error('Failed to retrieve crossbarDTO.');
+            return;
         }
+        this.crossbarView = crossbarDTO;
     }
+    
 
     private updateMountainView() {
         if (!this.mountainView) {
@@ -129,17 +132,23 @@ export default class LevelScene extends Phaser.Scene {
             }
         }     
     }
-    
+
+
 
     private displayQuestion() {
         const questionDTO = QuestionDTO.createRandomQuestion(1, 0, 0, 1);
         this.questionView = new QuestionView(this, questionDTO);
+
+        if (!this.crossbarView || !this.questionView) {
+            console.error('crossbarView or questionView is undefined.');
+            return;
+        }
     
         if (this.crossbarView && this.mountainView && this.questionView) {
             this.container1 = this.add.container(350, 242, [this.crossbarView, this.questionView]);
-            this.container1?.setAngle(Phaser.Math.Between(0, 1) === 0 ? -10 : 10); 
+            this.container1?.setAngle(Phaser.Math.Between(0, 1) === 0 ? -10 : 10);
 
-            this.questionView.setPosition(-200, -80);
+            this.questionView.setPosition(0, -50);
     
             const container2 = this.add.container(0, 0, [this.container1, this.mountainView]);
             this.mountainView.setPosition(350, 330);
@@ -149,7 +158,7 @@ export default class LevelScene extends Phaser.Scene {
             this.tweens.add({
                 targets: container2,
                 x: 0,
-                duration: 1500,
+                duration: 1000,
                 ease: 'Power1',
                 yoyo: false,
                 onComplete: () => {
@@ -160,17 +169,15 @@ export default class LevelScene extends Phaser.Scene {
                         calculationString: this.calculationString,
                     });
                 },
-            });
-            
-             
-       
+            });            
         } else {
             console.warn('Either crossbarView, mountainView, or questionView is missing');
         }
     
         this.calculateAndDisplayText(questionDTO);
     }
-    
+
+
 
     private calculateAndDisplayText(questionData: QuestionDTO) {
         try {

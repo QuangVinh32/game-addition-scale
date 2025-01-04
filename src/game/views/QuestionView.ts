@@ -2,9 +2,7 @@ import { QuestionDTO } from "../dtos/QuestionDTO";
 import BaseView from "./BaseView";
 
 export default class QuestionView extends BaseView {
-    setOrigin(arg0: number, arg1: number) {
-        throw new Error("Method not implemented.");
-    }
+  
     public questionData: QuestionDTO;
     private answerText: Phaser.GameObjects.Text;
     private calculationText: Phaser.GameObjects.Text;
@@ -17,23 +15,23 @@ export default class QuestionView extends BaseView {
     }
 
     public createQuestion(): void {
-        
-        // this.answerText = this.scene.add.text(0, 100, "Đáp án: ...", {
-        //     fontSize: "20px Arial",
-        //     color: "black",
-        //     fontStyle: "bold",
-        // }).setResolution(2);
-    
+        // Create the text object
         this.calculationText = this.scene.add.text(0, 0, "", {
             fontSize: "70px Arial",
             color: "black",
             fontStyle: "bold",
         }).setResolution(2);
     
-        this.add([
-            // this.answerText, 
-            this.calculationText]);
+        // Create a container and add the text object to it
+        const container = this.scene.add.container(0, 0, [this.calculationText]);
+    
+        // Adjust the origin of the calculationText instead
+        this.calculationText.setOrigin(0.5, 0.5); // This adjusts the origin of the text within the container
+    
+        this.add([container]);
     }
+    
+    
 
     // public getAnswerText(): Phaser.GameObjects.Text {
     //     return this.answerText;

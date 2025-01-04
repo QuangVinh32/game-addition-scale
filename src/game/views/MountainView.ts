@@ -9,7 +9,6 @@ export default class MountainView extends BaseView {
         super(scene);
         this.mountainData = mountainData;
         this.createMountain();
-        // this.createTween();
         this.setViewPosition(mountainData.positionX, mountainData.positionY);
         this.updateContainerSize(mountainData.width, mountainData.height);
     }

@@ -10,7 +10,6 @@ export default class CrossbarView extends BaseView {
         this.crossbarData = crossbarData;
         this.createCrossbar();
         this.setViewPosition(crossbarData.positionX, crossbarData.positionY);
-        // this.updateContainerSize(crossbarData.width, crossbarData.height);
     }
 
     private createCrossbar(): void {

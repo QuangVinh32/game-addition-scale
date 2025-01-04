@@ -13,9 +13,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
     private optionViews: OptionView[] = [];    
     private boundaryGraphics: Phaser.GameObjects.Graphics;
     private isGameStarted: boolean;
-
-
-
     
     constructor() {
         super('QuestionAndOptionScene');
@@ -37,8 +34,6 @@ export class QuestionAndOptionScene extends Phaser.Scene {
     }
 
     async create() {
-
-        console.log('123456',this.isGameStarted)
 
         const gamePlayScene = this.scene.get('GamePlayScene') as GamePlayScene;
         gamePlayScene.events.once('gameStarted', () => {
@@ -138,23 +133,26 @@ export class QuestionAndOptionScene extends Phaser.Scene {
                     );
     
                     if (isCorrect) {
-                        this.successSound.play();
-                        this.scene.launch('UIScene',{correct: this.correct})
-
-                        this.scene.get('LevelScene').events.emit('updateLevel', { isCorrect: true });
 
                         gameObject.setVisible(false);
+
+                        this.successSound.play();
+
+                        this.scene.launch('UIScene',{correct: this.correct})
+                        this.scene.get('LevelScene').events.emit('updateLevel', { isCorrect: true });
                         this.scene.launch('TrueScene')
                         this.scene.stop('QuestionAndOptionScene')
 
                     } else {
+
+                        gameObject.setVisible(false); 
+
                         this.failureSound.play();
                         this.placementSound.play();
+                
                         this.scene.launch('UIScene',{incorrect: this.incorrect})
                         this.scene.get('LevelScene').events.emit('updateLevel', { isCorrect: false });
  
-                        // gameObject.setPosition(optionView.optionData.positionX, optionView.optionData.positionY);
-                        gameObject.setVisible(false); 
                         this.scene.launch('FalseScene')
                         this.scene.stop('QuestionAndOptionScene')
                     }
@@ -179,7 +177,7 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         } else {
             console.log('Sai!');
         }
-    
+        
         return isCorrect;
     }
     
@@ -187,7 +185,8 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         const screenHeight = this.scale.gameSize.height; 
         const upperBound = screenHeight / 2.5;
         return y < upperBound; 
-    }    
+    } 
+
     drawBoundary() {
         const screenHeight = this.scale.gameSize.height;
         const upperBound = screenHeight / 2.5;
@@ -196,4 +195,13 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         this.boundaryGraphics.lineStyle(2, 0xFF0000, 1); 
         this.boundaryGraphics.strokeRect(0, 0, this.scale.width, upperBound);
     }  
+
+    normalizeCalculationString(input: string): string {
+        // Thay thế -- bằng +
+        input = input.replace(/--/g, '+');
+        // Thay thế +- hoặc -+ bằng -
+        input = input.replace(/\+-|-\+/g, '-');
+        return input;
+    }
+    
 }
