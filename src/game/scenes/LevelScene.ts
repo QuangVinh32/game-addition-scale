@@ -143,6 +143,8 @@ export default class LevelScene extends Phaser.Scene {
             this.questionView.setPosition(-200, -80);
     
             const container2 = this.add.container(0, 0, [this.container1, this.mountainView]);
+            this.mountainView.setPosition(350, 330);
+
             container2.setPosition(this.cameras.main.width + 200, this.cameras.main.centerY - 300);
     
             this.tweens.add({

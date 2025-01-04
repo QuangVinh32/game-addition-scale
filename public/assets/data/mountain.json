@@ -2,8 +2,8 @@
     "mountains": [
       {
         "mountainId": 1,
-        "positionX": 0,
-        "positionY": 0,
+        "positionX": 10000,
+        "positionY": 10000,
         "width": 195.3,
         "height": 153.9,
         "frame": "frame0",
