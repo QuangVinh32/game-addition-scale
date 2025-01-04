@@ -129,9 +129,7 @@ export default class LevelScene extends Phaser.Scene {
                 });
             }
         }
-         else {
-            this.mountainView.changeFrame('frame0');
-        }
+        
     }
     
 
