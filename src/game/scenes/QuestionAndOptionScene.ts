@@ -113,6 +113,8 @@ export class QuestionAndOptionScene extends Phaser.Scene {
             if (!this.isGameStarted) return; 
             if (gameObject === container) {
                 gameObject.setScale(1.1);
+                this.children.bringToTop(gameObject);
+
             }
         });
     

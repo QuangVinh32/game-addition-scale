@@ -111,9 +111,9 @@ export default class LevelScene extends Phaser.Scene {
                 let targetX = this.questionView.x; 
         
                 if (angle === -10) {
-                    targetX -= 650; 
+                    targetX -= 700; 
                 } else if (angle === 10) {
-                    targetX += 650; 
+                    targetX += 700; 
                 }
         
                 this.tweens.add({
@@ -132,14 +132,13 @@ export default class LevelScene extends Phaser.Scene {
     
 
     private displayQuestion() {
-        const questionDTO = QuestionDTO.createRandomQuestion(1, 500, 500, 1);
+        const questionDTO = QuestionDTO.createRandomQuestion(1, 0, 0, 1);
         this.questionView = new QuestionView(this, questionDTO);
     
         if (this.crossbarView && this.mountainView && this.questionView) {
             this.container1 = this.add.container(350, 242, [this.crossbarView, this.questionView]);
             this.container1?.setAngle(Phaser.Math.Between(0, 1) === 0 ? -10 : 10); 
 
-            this.crossbarView.setPosition(-this.crossbarView.width / 2, -this.crossbarView.height / 2);
             this.questionView.setPosition(-200, -80);
     
             const container2 = this.add.container(0, 0, [this.container1, this.mountainView]);
@@ -154,10 +153,6 @@ export default class LevelScene extends Phaser.Scene {
                 ease: 'Power1',
                 yoyo: false,
                 onComplete: () => {
-                    console.log('Tween complete. Emitting calculation data:', this.calculationString, 'and', this.calculatedValue);
-            
-                    // this.registry.set('calculationString', this.calculationString);
-                    // this.registry.set('calculatedValue', this.calculatedValue);
             
                     this.scene.launch('QuestionAndOptionScene', {
                         levelId: this.levelId,
