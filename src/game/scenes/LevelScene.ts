@@ -56,7 +56,7 @@ export default class LevelScene extends Phaser.Scene {
 
     private async initializeServices() {
         this.mountainService = new MountainService(this, 'assets/data/mountain.json');
-        await this.mountainService.initializeNoView(this.levelId);
+        await this.mountainService.initialize(this.levelId);
 
         this.crossbarService = new CrossbarService(this, 'assets/data/crossbar.json');
         await this.crossbarService.initialize(this.levelId);
@@ -70,7 +70,7 @@ export default class LevelScene extends Phaser.Scene {
 
         const mountainDTO = this.mountainService.getMountainDTOById(this.levelId);
         if (mountainDTO) {
-            this.mountainView = this.mountainService.getMountainViewById(this.levelId);
+            // this.mountainView = this.mountainService.getMountainViewById(this.levelId);
         }
 
         const crossbarDTO = this.crossbarService.getCrossbarViewById(this.levelId);
