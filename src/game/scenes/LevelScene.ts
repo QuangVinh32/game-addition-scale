@@ -70,7 +70,7 @@ export default class LevelScene extends Phaser.Scene {
 
         const mountainDTO = this.mountainService.getMountainDTOById(this.levelId);
         if (mountainDTO) {
-            // this.mountainView = this.mountainService.getMountainViewById(this.levelId);
+            this.mountainView = this.mountainService.getMountainViewById(this.levelId);
         }
 
         const crossbarDTO = this.crossbarService.getCrossbarViewById(this.levelId);
