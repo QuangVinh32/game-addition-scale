@@ -41,15 +41,16 @@ export default class LevelScene extends Phaser.Scene {
 
     async create() {
         
+        this.isCorrect = null;
         this.events.on('updateLevel', (data: { isCorrect: boolean }) => {
             this.isCorrect = data.isCorrect;
             console.log('Received data in LevelScene:', data);
-            // this.updateMountainView();
+            this.updateMountainView();
         });
 
         await this.initializeServices();
         this.initializeViews();
-        this.updateMountainView();
+        // this.updateMountainView();
         this.displayQuestion();
     }
 
@@ -79,7 +80,6 @@ export default class LevelScene extends Phaser.Scene {
     }
 
     private updateMountainView() {
-
         if (!this.mountainView) {
             console.warn('Mountain view is not initialized.');
             return;
@@ -94,7 +94,7 @@ export default class LevelScene extends Phaser.Scene {
                 const calculatedValue = this.registry.get('calculatedValue') || 0;
     
                 const updatedCalculationString = calculationString.replace('?', calculatedValue.toString());
-                // this.questionView.getCalculationText().setText(updatedCalculationString);
+                this.questionView.getCalculationText().setText(updatedCalculationString);
                 
             }
         }else if (this.isCorrect === false) {
@@ -107,7 +107,7 @@ export default class LevelScene extends Phaser.Scene {
                 const calculatedValue = this.registry.get('calculatedValue') || 0;
         
                 const updatedCalculationString = calculationString.replace('?', calculatedValue.toString());
-                // this.questionView.getCalculationText().setText(updatedCalculationString);
+                this.questionView.getCalculationText().setText(updatedCalculationString);
         
                 let targetX = this.questionView.x; 
         
@@ -117,16 +117,16 @@ export default class LevelScene extends Phaser.Scene {
                     targetX += 650; 
                 }
         
-                // this.tweens.add({
-                //     targets: this.questionView,
-                //     x: targetX, 
-                //     duration: 1100, 
-                //     ease: 'Power1', 
-                //     yoyo: false,
-                //     onComplete: () => {
+                this.tweens.add({
+                    targets: this.questionView,
+                    x: targetX, 
+                    duration: 1100, 
+                    ease: 'Power1', 
+                    yoyo: false,
+                    onComplete: () => {
 
-                //     },
-                // });
+                    },
+                });
             }
         }
          else {
