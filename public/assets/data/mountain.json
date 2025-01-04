@@ -1,0 +1,50 @@
+{
+    "mountains": [
+      {
+        "mountainId": 1,
+        "positionX": 350,
+        "positionY": 330,
+        "width": 195.3,
+        "height": 153.9,
+        "frame": "frame0",
+        "levelId": 1
+      },
+      {
+        "mountainId": 2,
+        "positionX": 100,
+        "positionY": 420,
+        "width": 120,
+        "height": 170,
+        "frame": "frame0",
+        "levelId": 2
+      },
+      {
+        "mountainId": 3,
+        "positionX": 100,
+        "positionY": 420,
+        "width": 110,
+        "height": 160,
+        "frame": "frame0",
+        "levelId": 3
+      },
+      {
+        "mountainId": 4,
+        "positionX": 100,
+        "positionY": 420,
+        "width": 130,
+        "height": 180,
+        "frame": "frame0",
+        "levelId": 4
+      },
+      {
+        "mountainId": 5,
+        "positionX": 100,
+        "positionY": 420,
+        "width": 140,
+        "height": 190,
+        "frame": "frame0",
+        "levelId": 5
+      }
+    ]
+  }
+  

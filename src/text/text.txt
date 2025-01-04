@@ -1,0 +1,194 @@
+ import OpitionDTO from "../dtos/OptionDTO";
+import BaseView from "./BaseView";
+
+export default class OptionView extends BaseView {
+    public optionData: OpitionDTO;
+    private buttonOption: Phaser.GameObjects.Image;
+    private textQuestion: Phaser.GameObjects.Text;
+    private container: Phaser.GameObjects.Container;
+
+    constructor(scene: Phaser.Scene, optionData: OpitionDTO) {
+        super(scene);
+        this.optionData = optionData;
+
+        // Tạo container
+        this.container = this.scene.add.container(optionData.positionX, optionData.positionY);
+        this.updateContainerSize(optionData.width, optionData.height);
+        this.createOption();
+        this.enableDrag();
+    }
+
+    private createOption(): void {
+        // Tạo button
+        this.buttonOption = this.scene.add.image(0, 0, 'button_option')
+            .setDisplaySize(this.optionData.width, this.optionData.height)
+            .setOrigin(0.5, 0.5);
+
+        // Tạo text
+        this.textQuestion = this.scene.add.text(0, 0, this.optionData.value.toString(), {
+            fontSize: '50px',
+            color: 'black',
+            fontStyle: 'bold'
+        }).setOrigin(0.5, 0.5);
+
+        // Thêm vào container
+        this.container.add([this.buttonOption, this.textQuestion]);
+    }
+
+    private enableDrag(): void {
+        // Đặt container có thể kéo
+        this.container.setSize(this.optionData.width, this.optionData.height);
+        this.container.setInteractive();
+        this.scene.input.setDraggable(this.container);
+
+        // Lắng nghe các sự kiện kéo
+        this.scene.input.on('dragstart', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.Container) => {
+            if (gameObject === this.container) {
+                gameObject.setScale(1.1);
+            }
+        });
+
+        this.scene.input.on('drag', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.Container, dragX: number, dragY: number) => {
+            if (gameObject === this.container) {
+                gameObject.x = dragX;
+                gameObject.y = dragY;
+            }
+        });
+
+        this.scene.input.on('dragend', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.Container) => {
+            if (gameObject === this.container) {
+                gameObject.setScale(1); 
+                console.log(Thả container tại: (${gameObject.x}, ${gameObject.y}));
+
+                // Kiểm tra vị trí
+                if (this.isCorrectDrop(gameObject.x, gameObject.y)) {
+                    console.log('Thả đúng!');
+                    // Ẩn container khi thả đúng
+                    // this.container.setVisible(false); // Ẩn container
+                } else {
+                    console.log('Thả sai!');
+                    // Đưa về vị trí ban đầu
+                    gameObject.setPosition(this.optionData.positionX, this.optionData.positionY);
+                }
+            }
+        });
+    }
+
+    private isCorrectDrop(x: number, y: number): boolean {
+        // Kiểm tra nếu container nằm ở nửa trên của màn hình
+        const screenHeight = this.scene.scale.gameSize.height; // Lấy chiều cao màn hình
+        const upperBound = screenHeight / 2; // Giới hạn nửa trên màn hình
+
+        // Điều kiện: Nếu vị trí y nhỏ hơn upperBound, coi là đúng
+        return y < upperBound;
+    }
+}
+        
+        
+
+
+
+
+
+
+import OptionDTO from '../dtos/OptionDTO';
+   
+import OptionView from '../views/OptionView';
+
+export class QuestionAndOptionScene extends Phaser.Scene{
+    public successSound: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound;
+    public failureSound: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound; 
+    private buttonCheer: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound;
+
+
+    private levelId: number;
+    private score: number;
+
+
+    constructor(){
+        super('QuestionAndOptionScene')
+    }
+
+    init(data: {levelId: number,score: number}) {
+        this.levelId = data.levelId;
+        this.score = data.score || 1
+        console.log(data.score)
+    }
+
+    preload() { 
+        this.load.image('button_option', 'assets/images/button_option.png');
+ 
+        this.load.audio('sound_success', 'assets/audio/sound_success.mp3');
+        this.load.audio('sound_failure', 'assets/audio/sound_failure.mp3');
+        this.load.audio('sound_cheer', 'assets/audio/sound_cheer.mp3')
+
+    }
+
+  
+
+    async create(){
+
+        this.successSound = this.sound.add('sound_success', {
+            volume: 3,
+        });
+        this.failureSound = this.sound.add('sound_failure', {
+            volume: 3,
+        });
+        this.buttonCheer = this.sound.add('sound_cheer', {
+            volume: 1,
+        });
+
+        const options = [];
+        const maxMonkeys = 15;
+ 
+        // Luôn xuất hiện đáp án
+        options.push(10);
+        
+        while (options.length < 5) {
+            const randomValue = Phaser.Math.Between(0, maxMonkeys);
+            if (!options.includes(randomValue)) {
+                options.push(randomValue);
+            }
+        }
+            Phaser.Utils.Array.Shuffle(options);
+            
+            options.forEach((value, index) => {
+                const x = 90 + index * 130; 
+                const y = 520;             
+                const width = 80;           
+                const height = 110;          
+                const isAnswer = value === 10; 
+            
+                const optionDTO = new OptionDTO(
+                    index,        
+                    isAnswer,    
+                    value,        
+                    this.levelId, 
+                    x,            
+                    y,            
+                    width,        
+                    height    
+                );
+            
+                const optionView = new OptionView(this, optionDTO);
+                optionView.setPosition(x, y);
+                this.add.existing(optionView);
+            
+
+            });
+    }
+
+    checkAnswer(currentCount: number, optionDTO: OptionDTO): void {
+        if (currentCount === optionDTO.value) {
+            console.log('Đúng!');
+     
+
+        } else {
+            console.log('Sai!');
+            
+        }
+}
+}
+
+ 
+     

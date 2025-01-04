@@ -1,0 +1,50 @@
+{
+    "crossbars": [
+      {
+        "crossbarId": 1,
+        "positionX": 0,
+        "positionY": 0,
+        "width": 600,
+        "height": 20,
+        "texture": "crossbar",
+        "levelId": 1
+      },
+      {
+        "crossbarId": 2,
+        "positionX": 300,
+        "positionY": 150,
+        "width": 100,
+        "height": 40,
+        "texture": "crossbar",
+        "levelId": 2
+      },
+      {
+        "crossbarId": 3,
+        "positionX": 500,
+        "positionY": 250,
+        "width": 140,
+        "height": 60,
+        "texture": "crossbar",
+        "levelId": 3
+      },
+      {
+        "crossbarId": 4,
+        "positionX": 200,
+        "positionY": 300,
+        "width": 110,
+        "height": 45,
+        "texture": "crossbar",
+        "levelId": 4
+      },
+      {
+        "crossbarId": 5,
+        "positionX": 400,
+        "positionY": 350,
+        "width": 130,
+        "height": 55,
+        "texture": "crossbar",
+        "levelId": 5
+      }
+    ]
+  }
+  
