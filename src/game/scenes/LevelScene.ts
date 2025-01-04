@@ -107,7 +107,7 @@ export default class LevelScene extends Phaser.Scene {
                 const calculatedValue = this.registry.get('calculatedValue') || 0;
         
                 const updatedCalculationString = calculationString.replace('?', calculatedValue.toString());
-                this.questionView.getCalculationText().setText(updatedCalculationString);
+                // this.questionView.getCalculationText().setText(updatedCalculationString);
         
                 let targetX = this.questionView.x; 
         
