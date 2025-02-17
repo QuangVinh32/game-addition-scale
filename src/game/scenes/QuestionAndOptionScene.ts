@@ -196,12 +196,5 @@ export class QuestionAndOptionScene extends Phaser.Scene {
         this.boundaryGraphics.strokeRect(0, 0, this.scale.width, upperBound);
     }  
 
-    normalizeCalculationString(input: string): string {
-        // Thay thế -- bằng +
-        input = input.replace(/--/g, '+');
-        // Thay thế +- hoặc -+ bằng -
-        input = input.replace(/\+-|-\+/g, '-');
-        return input;
-    }
     
 }

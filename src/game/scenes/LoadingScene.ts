@@ -9,7 +9,6 @@ export default class LoadingScene extends Phaser.Scene {
             frameHeight: 64,
             endFrame: 9
         });
-        this.load.image('logo','assets/images/logo.png');
     }
     
     create() {

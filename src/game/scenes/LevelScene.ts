@@ -10,7 +10,7 @@ export default class LevelScene extends Phaser.Scene {
     private crossbarView: any;
     private mountainView: any;
     private questionView: QuestionView | null;
-    private isCorrect: boolean | null;
+    private isCorrect: boolean | null;  
     private container1: Phaser.GameObjects.Container | null;
     private calculationString: any;
     private calculatedValue : any;
@@ -25,8 +25,6 @@ export default class LevelScene extends Phaser.Scene {
         this.questionView = null;
         this.isCorrect = null;
         this.container1 = null;
-        
-
 
     }
 
@@ -79,7 +77,6 @@ export default class LevelScene extends Phaser.Scene {
         }
         this.crossbarView = crossbarDTO;
     }
-    
 
     private updateMountainView() {
         if (!this.mountainView) {
@@ -133,8 +130,6 @@ export default class LevelScene extends Phaser.Scene {
         }     
     }
 
-
-
     private displayQuestion() {
         const questionDTO = QuestionDTO.createRandomQuestion(1, 0, 0, 1);
         this.questionView = new QuestionView(this, questionDTO);
@@ -148,7 +143,7 @@ export default class LevelScene extends Phaser.Scene {
             this.container1 = this.add.container(350, 242, [this.crossbarView, this.questionView]);
             this.container1?.setAngle(Phaser.Math.Between(0, 1) === 0 ? -10 : 10);
 
-            this.questionView.setPosition(0, -50);
+            this.questionView.setPosition(0, -45);
     
             const container2 = this.add.container(0, 0, [this.container1, this.mountainView]);
             this.mountainView.setPosition(350, 330);
@@ -209,7 +204,6 @@ export default class LevelScene extends Phaser.Scene {
             this.registry.set('calculationString', this.calculationString);
             this.registry.set('calculatedValue', this.calculatedValue);
     
-            // this.questionView.getAnswerText().setText(`Đáp án: ${this.calculatedValue.toFixed(0)}`);
             this.questionView.getCalculationText().setText(this.calculationString);
         } catch (error) {
             console.error('Error calculating text:', error);
