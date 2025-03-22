@@ -1,4 +1,4 @@
-import { BaseDTO } from "./BaseDTO";
+import { BaseDTO } from "mct-common";
 
 export class MountainDTO extends BaseDTO{
     private _mountainId: number;

@@ -1,5 +1,5 @@
+import { BaseView } from "mct-common";
 import OpitionDTO from "../dtos/OptionDTO";
-import BaseView from "./BaseView";
 
 export default class OptionView extends BaseView {
     public optionData: OpitionDTO;

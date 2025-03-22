@@ -1,4 +1,4 @@
-import { BaseDTO } from "./BaseDTO";
+import { BaseDTO } from "mct-common";
 
 export class CrossbarDTO extends BaseDTO{
     private _crossbarId: number;

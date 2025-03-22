@@ -5,13 +5,14 @@
 
 import { AUTO, Game } from "phaser";
 import Boot from "./scenes/Boot";
-import LoadingScene from "./scenes/LoadingScene";
+// import LoadingScene from "./scenes/LoadingScene";
 import UIScene from "./scenes/UIScene";
 import GamePlayScene from "./scenes/GamePlayScene";
 import { QuestionAndOptionScene } from "./scenes/QuestionAndOptionScene";
 import LevelScene from "./scenes/LevelScene";
 import TrueScene from "./scenes/TrueScene";
 import FalseScene from "./scenes/FalseScene";
+import { LoadingScene } from "mct-common";
 
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Phaser.Types.Core.GameConfig = {

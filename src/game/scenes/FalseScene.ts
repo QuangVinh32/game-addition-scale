@@ -73,7 +73,6 @@ export default class FalseScene extends Phaser.Scene {
                 onComplete: () => {
                     this.scene.start('LevelScene')
                     this.scene.stop('FalseScene')
-
                 },
             });
         });

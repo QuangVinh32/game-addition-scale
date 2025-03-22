@@ -3,6 +3,7 @@ import { CrossbarService } from "../services/CrossbarService";
 import { MountainService } from "../services/MountainService";
 import QuestionView from "../views/QuestionView";
 
+
 export default class LevelScene extends Phaser.Scene {
     private levelId: number;
     private mountainService: MountainService | null;
@@ -14,6 +15,7 @@ export default class LevelScene extends Phaser.Scene {
     private container1: Phaser.GameObjects.Container | null;
     private calculationString: any;
     private calculatedValue : any;
+    private progressBar: any;
 
     constructor() {
         super('LevelScene');
@@ -36,6 +38,9 @@ export default class LevelScene extends Phaser.Scene {
     }
 
     async create() {
+
+  
+        
         
         this.events.on('updateLevel', (data: { isCorrect: boolean }) => {
             this.isCorrect = data.isCorrect;

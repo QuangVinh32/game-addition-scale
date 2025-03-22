@@ -1,7 +1,7 @@
+import { BaseService } from 'mct-common';
 import { CrossbarController } from '../controllers/CrossbarController';
 import { CrossbarDTO } from '../dtos/CrossbarDTO';
 import CrossbarView from '../views/CrossbarView';
-import BaseService from './BaseService';
 
 export class CrossbarService extends BaseService<CrossbarDTO> {
     private controller: CrossbarController;

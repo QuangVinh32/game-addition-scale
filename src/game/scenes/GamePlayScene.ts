@@ -1,6 +1,8 @@
+
 export default class GamePlayScene extends Phaser.Scene {
     private buttonSound: Phaser.Sound.BaseSound | null = null;
     private isGameStarted: boolean = false;
+    private progressBar: any;
     constructor() {
         super('GamePlayScene');
     }
@@ -11,6 +13,14 @@ export default class GamePlayScene extends Phaser.Scene {
     }
 
     create() {
+
+
+        this.scene.launch('UIScene'); 
+        this.scene.launch('LevelScene'); 
+
+        
+
+
         this.buttonSound = this.sound.add('sound_initial', {
             volume: 1,
         });

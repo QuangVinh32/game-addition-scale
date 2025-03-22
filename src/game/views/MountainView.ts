@@ -1,5 +1,5 @@
+import { BaseView } from 'mct-common';
 import { MountainDTO } from '../dtos/MountainDTO';
-import BaseView from './BaseView';
 
 export default class MountainView extends BaseView {
     public mountainData: MountainDTO;

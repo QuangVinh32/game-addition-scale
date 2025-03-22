@@ -1,5 +1,5 @@
+import { BaseView } from 'mct-common';
 import { CrossbarDTO } from '../dtos/CrossbarDTO';
-import BaseView from './BaseView';
 
 export default class CrossbarView extends BaseView {
     public crossbarData: CrossbarDTO;

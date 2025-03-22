@@ -138,6 +138,7 @@ export class QuestionAndOptionScene extends Phaser.Scene {
 
                         this.successSound.play();
 
+
                         this.scene.launch('UIScene',{correct: this.correct})
                         this.scene.get('LevelScene').events.emit('updateLevel', { isCorrect: true });
                         this.scene.launch('TrueScene')

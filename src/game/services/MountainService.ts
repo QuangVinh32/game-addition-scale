@@ -1,7 +1,7 @@
+import { BaseService } from 'mct-common';
 import { MountainController } from '../controllers/MountainController';
 import { MountainDTO } from '../dtos/MountainDTO';
 import MountainView from '../views/MountainView';
-import BaseService from './BaseService';
 
 export class MountainService extends BaseService<MountainDTO> {
     private controller: MountainController;
